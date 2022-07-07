@@ -31,22 +31,22 @@
 
     <!-- 'Navigation bar' -->
     <div id="navbar">
-        <a href="#pers_char">Personal characteristics</a>
-        <a href="#edu">Education</a>
-        <a href="#skil">Skills</a>
-        <a href="#know_of_lang">Knowledge of languages</a>
-        <a href="#work_exp">Working experience</a>
-        <a href="">Contact</a>
+        <a href="" title="Please, click to show/hide this content at the page!">Personal characteristics</a> <!-- #pers_char -->
+        <a href="" title="Please, click to show/hide this content at the page!">Education</a> <!-- #edu -->
+        <a href="" title="Please, click to show/hide this content at the page!">Skills</a> <!-- #skil -->
+        <a href="" title="Please, click to show/hide this content at the page!">Knowledge of languages</a> <!-- #know_of_lang -->
+        <a href="" title="Please, click to show/hide this content at the page!">Working experience</a> <!-- #work_exp -->
+        <a href="" title="Please, click to show/hide this content at the page!">Contact</a>
     </div>
 
-    <!-- Ovaj 'row' je 'flex container' za levi i desni deo. levi i desni deo zauzimaju po 30% i 70% -->
+    <!-- Ovaj 'row' je 'flex container' za levi i desni deo. levi i desni deo zauzimaju po 30% i 70%-->
     <div class="row">
 
         <!-- Levi deo stranice -->
         <div class="side">
             <h4>Is IT me you looking for?</h4>
             <img src="Momir.png" alt="My image"><br><br>
-            <div id="pers_char" class="content">
+            <div class="content" data-hidden-content="yes"> <!--  id="pers_char" -->
                 <h2>Personal characteristics</h2>
                 <div class="gray">
                     <ul>
@@ -82,7 +82,16 @@
 
         <!-- Glavni deo, koji se nalazi sa desne strane -->
         <div class="main">
-            <div id="edu" class="content">
+            <p id="hello">
+                Hello my dears! To read more about me- you can click on the links, up on the navigation bar.
+            </p>
+            <p id="info-on-show" data-hidden-info-on-show="yes">
+                You just have changed the content at this page! Please take a look! (You just have showed some content at this page to read! Please take a look!)
+            </p>
+            <p id="info-on-hide" data-hidden-info-on-hide="yes">
+                You just have hidden some content!
+            </p>
+            <div class="content" data-hidden-content="yes"> <!--  id="edu" -->
                 <h2>Education</h2>
                 <h5>All times wealth!</h5>
                 <div class="gray">
@@ -97,7 +106,7 @@
                     </ul>
                 </div>
             </div><br>
-            <div id="skil" class="content">
+            <div class="content" data-hidden-content="yes"> <!--  id="skil" -->
                 <h2>Skills</h2>
                 <div class="gray">
                     <ul>
@@ -113,7 +122,7 @@
                     </ul>
                 </div>
             </div><br>
-            <div id="know_of_lang" class="content">
+            <div class="content" data-hidden-content="yes"> <!--  id="know_of_lang" -->
                 <h2>Knowledge of languages</h2>
                 <div class="gray">
                     <ul>
@@ -124,7 +133,7 @@
                     </ul>
                 </div>
             </div><br>
-            <div id="work_exp" class="content">
+            <div class="content" data-hidden-content="yes"> <!--  id="work_exp" -->
                 <h2>Working experience</h2>
                 <div class="gray">
                     <ul>
@@ -141,7 +150,5 @@
     <div class="footer">
         <h2>Ovo je...</h2>
     </div>
-
 </body>
-
 </html>
