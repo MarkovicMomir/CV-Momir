@@ -8,18 +8,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Momir">
     <title>Momir- CV</title>
+
     <link rel="stylesheet" href="momir_cv.css">
+
     <link rel="icon" href="Momir.png">
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
     crossorigin="anonymous"></script>
+    
     <script src="momir_cv.js"></script>
+
 </head>
 
 <body>
 
     <!-- Zuti 'header' koji se nalazi na vrhu -->
-    <div class="header1">
+    <div id="header1">
         <h4>Curriculum Vitae</h4>
     </div>
 
@@ -31,22 +36,29 @@
 
     <!-- 'Navigation bar' -->
     <div id="navbar">
-        <a href="" title="Please, click to show/hide this content at the page!">Personal characteristics</a> <!-- #pers_char -->
-        <a href="" title="Please, click to show/hide this content at the page!">Education</a> <!-- #edu -->
-        <a href="" title="Please, click to show/hide this content at the page!">Skills</a> <!-- #skil -->
-        <a href="" title="Please, click to show/hide this content at the page!">Knowledge of languages</a> <!-- #know_of_lang -->
-        <a href="" title="Please, click to show/hide this content at the page!">Working experience</a> <!-- #work_exp -->
-        <a href="" title="Please, click to show/hide this content at the page!">Contact</a>
+        <a href="#pers_char" title="Please, click to show/hide this content at the page!">Personal characteristics</a> 
+        <a href="#edu" title="Please, click to show/hide this content at the page!">Education</a> 
+        <a href="#skil" title="Please, click to show/hide this content at the page!">Skills</a> 
+        <a href="#know_of_lang" title="Please, click to show/hide this content at the page!">Knowledge of languages</a> 
+        <a href="#work_exp" title="Please, click to show/hide this content at the page!">Working experience</a> 
+        <a href="#footer" title="Please, click to see my contact information at the bottom of the page!">Contact</a>
     </div>
 
-    <!-- Ovaj 'row' je 'flex container' za levi i desni deo. levi i desni deo zauzimaju po 30% i 70%-->
+    <!-- Ovaj 'row' je 'flex container' za levi i desni deo. Levi i desni deo zauzimaju po 30% i 70% -->
+    <span id="register-info-narrow">
+        You may register for further cooperation with me.
+    </span>
     <div class="row">
+        <a id="register-btn-narrow" href="register.html">Register</a> 
 
         <!-- Levi deo stranice -->
         <div class="side">
             <h4>Is IT me you looking for?</h4>
             <img src="Momir.png" alt="My image"><br><br>
-            <div class="content" data-hidden-content="yes"> <!--  id="pers_char" -->
+            <p id="hello-narrow">
+                Hello my dears! To read more about me- you can click on the links, up on the navigation bar.
+            </p>
+            <div class="content" id="pers_char" data-hidden-content="yes"> 
                 <h2>Personal characteristics</h2>
                 <div class="gray">
                     <ul>
@@ -82,18 +94,22 @@
 
         <!-- Glavni deo, koji se nalazi sa desne strane -->
         <div class="main">
-            <p id="hello">
+            <span id="register-info-wide">
+                You may register for further cooperation with me.
+            </span>
+            <a id="register-btn-wide" href="#">Register</a>
+            <p id="hello-wide">
                 Hello my dears! To read more about me- you can click on the links, up on the navigation bar.
             </p>
             <p id="info-on-show" data-hidden-info-on-show="yes">
-                You just have changed the content at this page! Please take a look! (You just have showed some content at this page to read! Please take a look!)
+                You just have changed the content at this page! Please take a look!
             </p>
             <p id="info-on-hide" data-hidden-info-on-hide="yes">
                 You just have hidden some content!
             </p>
-            <div class="content" data-hidden-content="yes"> <!--  id="edu" -->
+            <div class="content" id="edu" data-hidden-content="yes"> 
                 <h2>Education</h2>
-                <h5>All times wealth!</h5>
+                All times wealth!
                 <div class="gray">
                     <ul>
                         <li>
@@ -106,7 +122,7 @@
                     </ul>
                 </div>
             </div><br>
-            <div class="content" data-hidden-content="yes"> <!--  id="skil" -->
+            <div class="content" id="skil" data-hidden-content="yes">
                 <h2>Skills</h2>
                 <div class="gray">
                     <ul>
@@ -122,7 +138,7 @@
                     </ul>
                 </div>
             </div><br>
-            <div class="content" data-hidden-content="yes"> <!--  id="know_of_lang" -->
+            <div class="content" id="know_of_lang" data-hidden-content="yes"> 
                 <h2>Knowledge of languages</h2>
                 <div class="gray">
                     <ul>
@@ -133,7 +149,7 @@
                     </ul>
                 </div>
             </div><br>
-            <div class="content" data-hidden-content="yes"> <!--  id="work_exp" -->
+            <div class="content" id="work_exp" data-hidden-content="yes"> 
                 <h2>Working experience</h2>
                 <div class="gray">
                     <ul>
@@ -145,10 +161,16 @@
 
         <!-- Kraj diva (klase 'row') koji predstavlja 'flex container' za levi i desni deo -->
     </div>
+    <a id="go-to-top" href="#header1">Go to the top</a>
 
     <!-- 'Footer' na dnu -->
-    <div class="footer">
-        <h2>Ovo je...</h2>
+    <div id="footer">
+        Momir Marković<br>
+        Petrovaradin (or Belgrade)<br>
+        Serbia<br>
+        +381 64 15 736 51<br>
+        momir.n.markovic@gmail.com<br>
     </div>
+
 </body>
 </html>

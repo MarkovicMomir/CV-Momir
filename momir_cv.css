@@ -7,16 +7,17 @@ body {
 /* Slike i ostali elementi su, u mnogim slucajevima, podeseni na 100% unutar svakog <div>-a. Da nije ovako podesen box-sizing (kao ispod), oni bi iskakali iz margina, a levi i desni deo ('side' i 'main') ne bi bili jedan pored drugog, vec bi se desni spustio. */
 div {
     box-sizing: border-box;
+    overflow: auto;
 }
 
-.header1 {
+#header1 {
     background-color: yellow;
     padding: 5px;
     text-align: center;
 }
 
 .header2 {
-    padding: 60px;
+    /* padding: 60px; */
     text-align: center;
     background-color: turquoise;
     color: white;
@@ -30,16 +31,43 @@ div {
 }
 
 /* Ovi linkovi se nalaze samo u 'Navigation baru' */
-a {
+#navbar a {
     color: white;
     padding: 14px 20px;
-    text-decoration: none;
-    text-align: center;
+    /* text-align: center; */
 }
 
-a:hover {
+a {
+  text-decoration: none;
+}
+
+#navbar a:hover, a:hover {
     background-color: lightgray;
     color: black;
+} /* Pojednostaviti (možda)! */
+
+#register-btn-narrow, #register-btn-wide {
+ /* display: inline-block; */ /* Višak. */
+  width: 100px;
+  border-radius: 20px;
+  margin: 5px;
+  background-color: lightgray;
+  font-size: 19px;
+}
+
+#register-btn-wide {
+  display: inline;
+  /* background-color: seashell;  */
+  float: right;
+}
+
+#register-btn-narrow {
+  /* background-color: lightgray; */
+  text-align: center;
+}
+
+#register-info-narrow, #register-info-wide {
+  color: #551A8B;
 }
 
 /* Ovaj 'row' je 'flex container' za glavne delove - levi i desni */
@@ -50,25 +78,69 @@ a:hover {
 
 /* Levi deo je 30% sirine */
 .side {
-  width: 30%;
+  /* width: 30%; */
   background-color: seashell;
-  padding: 20px;
+  /* padding: 20px; */
 }
 
 /* Glavni, desni deo je 70% sirine. on ce se lepo uklopiti sa levim delom, jer su unutar flex containera i ukupno 100% sirine */
-.main {
+/* .main {
   width: 70%;
   padding: 20px;
+} */
+
+@media screen and (min-width: 600px) {
+  .side {
+    width: 30%;
+    padding: 20px;
+  }
+  .main {
+    width: 70%;
+    padding: 20px;
+  }
+  .gray {
+    padding: 20px; 
+  }
+  a {
+    text-align: center;
+  }
+  #navbar {
+    position: sticky;
+    top: 0;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .header2 {
+    font-size: small;
+  }
+  h2 {
+    overflow-wrap: break-word;
+  }
+  .side {
+    width: 100%;
+    padding: 5px;
+  }
+  .main {
+    width: 100%;
+    padding: 5px;
+  }
+  a {
+    text-align: left;
+  }
+  /* img {
+    
+  } */ /* Ovde bih, možda, mogao da smanjim sliku. Možda i ne. */
 }
 
 .gray {
   background-color: lightgray;
   width: 100%;
-  padding: 20px;
+  /* padding: 20px; */
 }
 
 /* Sivi footer na dnu */
-.footer {
+#footer {
   padding: 20px;
   text-align: center;
   background-color: lightgray;
@@ -76,4 +148,19 @@ a:hover {
 
 img {
   width: 100%;
+}
+
+#info-on-show {
+  color: brown;
+}
+
+#info-on-hide {
+  color: darkgreen;
+}
+
+#go-to-top {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background-color: yellow;
 }
