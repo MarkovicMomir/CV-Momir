@@ -7,6 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Momir">
+    <meta name="description" content="Momir Marković- CV">
+    <meta name = "generator" content = "Visual Studio Code">
+    <meta name = "keywords" content = "momir marković, petrovaradin, novi sad, serbia, curriculum vitae, frontend developer, web programming">
     <title>Momir- CV</title>
 
     <link rel="stylesheet" href="momir_cv.css">
@@ -29,7 +32,7 @@
     </div>
 
     <!-- Zeleni 'header' koji se nalazi ispod zutog -->
-    <div class="header2">
+    <div id="header2">
         <h1>Momir Marković</h1>
         <h2>Frontend developer</h2>
     </div>
@@ -48,17 +51,17 @@
     <span id="register-info-narrow">
         You may register for further cooperation with me.
     </span>
-    <div class="row">
-        <a id="register-btn-narrow" href="register.html">Register</a> 
+    <div id="row">
+        <a id="register-btn-narrow" href="register.html" title="Unlock your power by registering for our cooperation!">Register</a> 
 
         <!-- Levi deo stranice -->
-        <div class="side">
+        <div id="side">
             <h4>Is IT me you looking for?</h4>
             <img src="Momir.png" alt="My image"><br><br>
             <p id="hello-narrow">
                 Hello my dears! To read more about me- you can click on the links, up on the navigation bar.
             </p>
-            <div class="content" id="pers_char" data-hidden-content="yes"> 
+            <div class="content" id="pers_char" data-content-is-hidden="true"> 
                 <h2>Personal characteristics</h2>
                 <div class="gray">
                     <ul>
@@ -93,21 +96,21 @@
         </div>
 
         <!-- Glavni deo, koji se nalazi sa desne strane -->
-        <div class="main">
+        <div id="main">
             <span id="register-info-wide">
                 You may register for further cooperation with me.
             </span>
-            <a id="register-btn-wide" href="#">Register</a>
+            <a id="register-btn-wide" href="register.html" title="Unlock your power by registering for our cooperation!">Register</a>
             <p id="hello-wide">
                 Hello my dears! To read more about me- you can click on the links, up on the navigation bar.
             </p>
-            <p id="info-on-show" data-hidden-info-on-show="yes">
+            <p id="info-on-show" data-info-on-show-is-hidden="true">
                 You just have changed the content at this page! Please take a look!
             </p>
-            <p id="info-on-hide" data-hidden-info-on-hide="yes">
+            <p id="info-on-hide" data-info-on-hide-is-hidden="true">
                 You just have hidden some content!
             </p>
-            <div class="content" id="edu" data-hidden-content="yes"> 
+            <div class="content" id="edu" data-content-is-hidden="true"> 
                 <h2>Education</h2>
                 All times wealth!
                 <div class="gray">
@@ -122,7 +125,7 @@
                     </ul>
                 </div>
             </div><br>
-            <div class="content" id="skil" data-hidden-content="yes">
+            <div class="content" id="skil" data-content-is-hidden="true">
                 <h2>Skills</h2>
                 <div class="gray">
                     <ul>
@@ -138,10 +141,11 @@
                     </ul>
                 </div>
             </div><br>
-            <div class="content" id="know_of_lang" data-hidden-content="yes"> 
+            <div class="content" id="know_of_lang" data-content-is-hidden="true"> 
                 <h2>Knowledge of languages</h2>
                 <div class="gray">
                     <ul>
+                        <li>Serbian (native)</li>
                         <li>English (fluent, both – written and spoken)</li>
                         <li>French (until now – medium level)</li>
                         <li>Spanish (until now – medium level)</li>
@@ -149,7 +153,7 @@
                     </ul>
                 </div>
             </div><br>
-            <div class="content" id="work_exp" data-hidden-content="yes"> 
+            <div class="content" id="work_exp" data-content-is-hidden="true"> 
                 <h2>Working experience</h2>
                 <div class="gray">
                     <ul>
@@ -161,7 +165,12 @@
 
         <!-- Kraj diva (klase 'row') koji predstavlja 'flex container' za levi i desni deo -->
     </div>
+
     <a id="go-to-top" href="#header1">Go to the top</a>
+
+    <p id="ps">
+        (P.S.: I am very proud of my two sons. Also, I am pleased that I have made my own recipes for integral pancakes and for a variety of integral bread, antic bread, and cakes...)
+    </p>
 
     <!-- 'Footer' na dnu -->
     <div id="footer">

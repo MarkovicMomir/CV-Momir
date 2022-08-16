@@ -16,8 +16,7 @@ div {
     text-align: center;
 }
 
-.header2 {
-    /* padding: 60px; */
+#header2 {
     text-align: center;
     background-color: turquoise;
     color: white;
@@ -30,71 +29,62 @@ div {
     flex-wrap: wrap;
 }
 
-/* Ovi linkovi se nalaze samo u 'Navigation baru' */
+/* Samo linkovi u 'Navigation baru' */
 #navbar a {
     color: white;
     padding: 14px 20px;
-    /* text-align: center; */
 }
 
 a {
   text-decoration: none;
 }
 
-#navbar a:hover, a:hover {
+#navbar a:hover, #register-btn-narrow:hover, #register-btn-wide:hover {
     background-color: lightgray;
     color: black;
-} /* Pojednostaviti (možda)! */
+}
 
 #register-btn-narrow, #register-btn-wide {
- /* display: inline-block; */ /* Višak. */
   width: 100px;
   border-radius: 20px;
   margin: 5px;
   background-color: lightgray;
   font-size: 19px;
+  color: #0000EE;
 }
 
 #register-btn-wide {
-  display: inline;
-  /* background-color: seashell;  */
   float: right;
 }
 
 #register-btn-narrow {
-  /* background-color: lightgray; */
   text-align: center;
 }
 
 #register-info-narrow, #register-info-wide {
-  color: #551A8B;
+  color: #0000EE;
 }
 
 /* Ovaj 'row' je 'flex container' za glavne delove - levi i desni */
-.row {  
+#row {  
     display: flex;
     flex-flow: row wrap;
 }
 
-/* Levi deo je 30% sirine */
-.side {
-  /* width: 30%; */
+#side {
   background-color: seashell;
-  /* padding: 20px; */
 }
 
-/* Glavni, desni deo je 70% sirine. on ce se lepo uklopiti sa levim delom, jer su unutar flex containera i ukupno 100% sirine */
-/* .main {
-  width: 70%;
-  padding: 20px;
-} */
-
 @media screen and (min-width: 600px) {
-  .side {
+
+  /* Levi deo je 30% sirine */
+  #side {
     width: 30%;
     padding: 20px;
-  }
-  .main {
+  } 
+  
+  /* Glavni, desni deo je 70% sirine. on ce se lepo uklopiti sa levim delom, jer su unutar flex containera i ukupno 100% sirine */
+  #main {
     width: 70%;
     padding: 20px;
   }
@@ -111,32 +101,28 @@ a {
 }
 
 @media screen and (max-width: 599px) {
-  .header2 {
+  #header2 {
     font-size: small;
   }
   h2 {
     overflow-wrap: break-word;
   }
-  .side {
+  #side {
     width: 100%;
     padding: 5px;
   }
-  .main {
+  #main {
     width: 100%;
     padding: 5px;
   }
   a {
     text-align: left;
   }
-  /* img {
-    
-  } */ /* Ovde bih, možda, mogao da smanjim sliku. Možda i ne. */
 }
 
 .gray {
   background-color: lightgray;
   width: 100%;
-  /* padding: 20px; */
 }
 
 /* Sivi footer na dnu */
@@ -163,4 +149,8 @@ img {
   bottom: 0;
   right: 0;
   background-color: yellow;
+}
+
+#ps{
+  padding: 0 10px;
 }

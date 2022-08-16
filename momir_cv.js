@@ -3,13 +3,16 @@ $(document).ready(function () {
     let infoOnShow = $('#info-on-show');
     let infoOnHide = $('#info-on-hide');
     let content = $('.content');
+
     infoOnShow.hide();
-    infoOnHide.hide(); // Možda da, za prethodne 2 linije napravim f-je!
+    infoOnHide.hide();
+
     for (let i = 0; i <= 4; i++) {
         content.eq(i).hide('slow');
     };
+
     let mediaQuery = window.matchMedia("(max-width: 599px)");
-    let screen_width;
+    let screenIsNarrow;
     function screen_check(x) {
         let helloNarrow = $('#hello-narrow');
         let helloWide = $('#hello-wide');
@@ -18,7 +21,7 @@ $(document).ready(function () {
         let registerInfoNarrow = $('#register-info-narrow');
         let registerInfoWide = $('#register-info-wide');
         if (x.matches) {
-            screen_width = 'narrow';
+            screenIsNarrow = true;
             infoOnShow.hide();
             infoOnHide.hide();
             helloNarrow.show();
@@ -28,7 +31,7 @@ $(document).ready(function () {
             registerInfoNarrow.show();
             registerInfoWide.hide();
         } else {
-            screen_width = 'wide';
+            screenIsNarrow = false;
             helloNarrow.hide();
             helloWide.show();
             registerBtnNarrow.hide();
@@ -37,66 +40,62 @@ $(document).ready(function () {
             registerInfoWide.show();
         };
     }
+
     screen_check(mediaQuery);
     mediaQuery.addEventListener('change', screen_check);
-    /* let infoOnShow = $('#info-on-show');
-    let infoOnHide = $('#info-on-hide');
-    let content = $('.content');
-    infoOnShow.hide();
-    infoOnHide.hide();
-    for (let i = 0; i <= 4; i++) {
-        content.eq(i).hide('slow');
-    }; */
-    let hiddenContent;
+
+    let contentIsHidden;
     $('#navbar a').click((e) => {
         console.log(e.target.innerHTML); // Provera
-        // F-ja za prikazivanje 2 informaciona paragrafa:
+        // F-ja za prikazivanje 2 informaciona paragrafa, na sirokim ekranima:
         function showInfo(i) {
-            let hiddenInfoOnShow;
-            let hiddenInfoOnHide;
-            hiddenContent = content.eq(i).attr('data-hidden-content');
-            hiddenInfoOnShow = infoOnShow.attr('data-hidden-info-on-show');
-            hiddenInfoOnHide = infoOnHide.attr('data-hidden-info-on-hide');
-            if (screen_width == 'wide') {
-                if (hiddenContent == 'yes' && hiddenInfoOnShow == 'yes') {
+            let InfoOnShowIsHidden;
+            let InfoOnHideIsHidden;
+            contentIsHidden = content.eq(i).attr('data-content-is-hidden') === 'true'; // Dohvatamo string vrednost, odgovarajuceg atributa, i konvertujemo string 'true'/'false' u 'Bool'-ovu vrednost.
+            // contentIsHidden = JSON.parse(content.eq(i).attr('data-content-is-hidden')); // Moze i ovako.
+            InfoOnShowIsHidden = infoOnShow.attr('data-info-on-show-is-hidden') === 'true';
+            InfoOnHideIsHidden = infoOnHide.attr('data-info-on-hide-is-hidden') === 'true';
+            if (!screenIsNarrow) {
+                if (contentIsHidden && InfoOnShowIsHidden) {
                     infoOnShow.show();
                     infoOnHide.hide();
-                    infoOnShow.attr('data-hidden-info-on-show', 'no');
-                    infoOnHide.attr('data-hidden-info-on-hide', 'yes');
-                    content.eq(i).attr('data-hidden-content', 'no');
-                } else if (hiddenContent == 'no' && hiddenInfoOnHide == 'no') {
+                    infoOnShow.attr('data-info-on-show-is-hidden', 'false');
+                    infoOnHide.attr('data-info-on-hide-is-hidden', 'true');
+                    content.eq(i).attr('data-content-is-hidden', 'false');
+                } else if (!contentIsHidden && !InfoOnHideIsHidden) {
                     infoOnHide.hide('slow');
                     infoOnHide.show('slow');
                     infoOnShow.hide();
-                    infoOnShow.attr('data-hidden-on-show', 'yes');
-                    infoOnHide.attr('data-hidden-on-hide', 'no');
-                    content.eq(i).attr('data-hidden-content', 'yes');
-                } else if (hiddenContent == 'no') {
+                    infoOnShow.attr('data-info-on-show-is-hidden', 'true');
+                    infoOnHide.attr('data-info-on-hide-is-hidden', 'false');
+                    content.eq(i).attr('data-content-is-hidden', 'true');
+                } else if (!contentIsHidden) {
                     infoOnShow.hide();
                     infoOnHide.show();
-                    infoOnShow.attr('data-hidden-info-on-show', 'yes');
-                    infoOnHide.attr('data-hidden-info-on-hide', 'no');
-                    content.eq(i).attr('data-hidden-content', 'yes');
-                } else if (hiddenContent == 'yes' && hiddenInfoOnShow == 'no') {
+                    infoOnShow.attr('data-info-on-show-is-hidden', 'true');
+                    infoOnHide.attr('data-info-on-hide-is-hidden', 'false');
+                    content.eq(i).attr('data-content-is-hidden', 'true');
+                } else if (contentIsHidden && !InfoOnShowIsHidden) {
                     infoOnShow.hide('slow');
                     infoOnShow.show('slow');
-                    content.eq(i).attr('data-hidden-content', 'no');
+                    content.eq(i).attr('data-content-is-hidden', 'false');
                 };
             }
-            if (screen_width == 'narrow') {
-                if (hiddenContent == 'no') {
-                    content.eq(i).attr('data-hidden-content', 'yes')
+            if (screenIsNarrow) {
+                if (!contentIsHidden) {
+                    content.eq(i).attr('data-content-is-hidden', 'true')
                 }
-                if (hiddenContent == 'yes') {
-                    content.eq(i).attr('data-hidden-content', 'no')
+                if (contentIsHidden) {
+                    content.eq(i).attr('data-content-is-hidden', 'false')
                 }
             }
         };
-        function content_manipulation (e) {
+
+        function content_manipulation(e) {
             switch (e.target.innerHTML) {
                 case 'Personal characteristics': content.eq(0).toggle('slow', function () {
-                    hiddenContent = content.eq(0).attr('data-hidden-content');
-                    if (hiddenContent == 'yes' && screen_width == 'wide') {
+                    contentIsHidden = content.eq(0).attr('data-content-is-hidden') === 'true'; // Dohvatamo string vrednost, odgovarajuceg atributa, i konvertujemo string 'true'/'false' u 'Bool'-ovu vrednost.
+                    if (contentIsHidden && !screenIsNarrow) {
                         alert('You just have showed some content at this page to read! Please take a look!');
                     }
                     showInfo(0);
@@ -112,10 +111,10 @@ $(document).ready(function () {
                     break;
             }
         }
-        if (screen_width == 'wide' && e.target.innerHTML !== 'Contact') {
+        if (!screenIsNarrow && e.target.innerHTML !== 'Contact') {
             e.preventDefault();
         }
+
         content_manipulation(e);
     });
-    // mediaQuery.addEventListener('change', screen_check);
 })
