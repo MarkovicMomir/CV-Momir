@@ -136,7 +136,8 @@ $(document).ready(() => {
                 error: function(e) {
                     console.log("Gresska!");
                     console.log(e);
-                    alert(e.responseText);
+                    /* alert(e.responseText); */ //Varijanta kada, stvarno imamo 'backend'.
+                    alert(e.statusText);
                     $('#serverMessage').html(e.responseText);
                 }
             });
