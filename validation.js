@@ -102,7 +102,7 @@ $(document).ready(() => {
 
             // I varijanta- simuliramo slanje podataka na server (jer nemamo 'backend'):
 
-            console.log("Salju se podaci na server"); /* Poruka u konzoli, kojom oznacavamo da bi se u realnoj situaciji (pri, na serveru, postavljenom prijemnom fajlu- 'ime_prijemnog_fajla_na_serveru.php', iz atributa 'action', elementa <form>), u ovom trenutku, slali podaci na server! */
+            console.log("Salju se podaci na server"); /* Poruka u konzoli, kojom oznacavamo da bi se u realnoj situaciji (pri, na serveru, postavljenom prijemnom fajlu- 'handle.php', iz atributa 'action', elementa <form>), u ovom trenutku, slali podaci na server! */
            
             // Kraj I varijante.
 
@@ -115,7 +115,7 @@ $(document).ready(() => {
             console.log(`url=${url}`);
 
             $.ajax({
-                // 'success' i 'error' su metodi ovog objekta (objekta u kojem se nalaze podesavanja jQuery metoda 'ajax'), koji, pri uspesnom slanju ('success'), tj. neuspesnom ('error'), u vidu odgovora sa servera, primaju podatke, koji, obicno, predstavljaju informaciju korisniku o uspesnosti slanja njegovih podataka i uspesnosti njegove registracije, a mi, ovde, napisemo kako da se ti podaci iskoriste. Pri uspelom slanju, aktivira se metod 'success', koji, sa izlaza 'backend' fajla na serveru ('ime_prijemnog_fajla_na_serveru.php'), prima podatke, npr. JSON-om, u vidu JS objekta, a pri neuspelom slanju se aktivira metod 'error', koji podrazumevano, sa servera, prima kao neki objekat 'stanja' (tj. 'statusa'), u kojem se nalaze podaci vezani za komunikaciju sa serverom! U tom objektu se, pod kljucem, 'responseText' nalazi i odgovor koji smo naveli na izlazu 'backend' fajla! Oba ova metoda ('success' i 'error') podatke, dobijene sa servera, prosledjuju na obradu, kao argument, svojim 'callback' f-jama (tzv. 'handler'-ima).
+                // 'success' i 'error' su metodi ovog objekta (objekta u kojem se nalaze podesavanja jQuery metoda 'ajax'), koji, pri uspesnom slanju ('success'), tj. neuspesnom ('error'), u vidu odgovora sa servera, primaju podatke, koji, obicno, predstavljaju informaciju korisniku o uspesnosti slanja njegovih podataka i uspesnosti njegove registracije, a mi, ovde, napisemo kako da se ti podaci iskoriste. Pri uspelom slanju, aktivira se metod 'success', koji, sa izlaza 'backend' fajla na serveru ('handle.php'), prima podatke, npr. JSON-om, u vidu JS objekta, a pri neuspelom slanju se aktivira metod 'error', koji podrazumevano, sa servera, prima kao neki objekat 'stanja' (tj. 'statusa'), u kojem se nalaze podaci vezani za komunikaciju sa serverom! U tom objektu se, pod kljucem, 'responseText' nalazi i odgovor koji smo naveli na izlazu 'backend' fajla! Oba ova metoda ('success' i 'error') podatke, dobijene sa servera, prosledjuju na obradu, kao argument, svojim 'callback' f-jama (tzv. 'handler'-ima).
                 type: "post",
                 url: url,
                 data: form.serialize(),
@@ -136,13 +136,12 @@ $(document).ready(() => {
                 error: function(e) {
                     console.log("Gresska!");
                     console.log(e);
-                    /* alert(e.responseText); */ //Varijanta kada, stvarno imamo 'backend'.
                     alert(e.statusText);
                     $('#serverMessage').html(e.responseText);
                 }
             });
 
-            // Da bi ova varijanta radila kako treba, u realnoj situaciji bi postojao i 'backend' fajl na serveru 'ime_prijemnog_fajla_na_serveru.php' i baza podataka sa kojom bi on bio povezan!
+            // Da bi ova varijanta radila kako treba, u realnoj situaciji bi postojao i 'backend' fajl na serveru 'handle.php' i baza podataka sa kojom bi on bio povezan!
            
             // Kraj II varijante.
 
