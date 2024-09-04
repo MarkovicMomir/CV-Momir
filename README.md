@@ -45,7 +45,7 @@ Contributions are not expected yet because of the nature of this project.
 
 ## Author
 
-[Momir Marković] (https://github.com/MarkovicMomir)
+Momir Marković (https://github.com/MarkovicMomir)
 
 ## Contact
 
