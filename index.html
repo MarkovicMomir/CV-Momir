@@ -1,3 +1,17 @@
+<!-- 4. septembra 2024.:
+- Unapređujem korisnicko iskustvo (UI/UX):
+    - U fajlu 'momir_cv.js' zadajem skrolovanje na prikazani HTML element i izbacujem 'alert' kao višak.
+    - Dodao sam, na malim ekranima, zatvaranje prikazanog sadržaja -> dugmetom 'X'.
+    - U fajlu 'momir_cv.css' menjam  da pasusi za prikaz informacija, '#info-on-show' i '#info-on-hide', na većim ekranima, budu 'sticky' ...(zalepljeni za gornju ivicu), kao '#navbar'. A za to sam im promenio i poziciju u HTML-u ('index.html')!
+    - Dodao sam krstić 'X', za zatvaranje pasusa sa ispisanim informacijama u '#info-on-show' i '#info-on-hide', doterujem ga u 'momir_cv.css', i dodajem mu funkcionalnost u fajlu 'momir_cv.js'. (U CSS-u zadajem i 'cursor: pointer'.)
+    - Dodajem funkcionalnost da se, pri kliku na link, na 'navbar'-u (za prikazivanje/sakrivanje sadržaja) njegova boja promeni (pri prikazivanju- u zeleno, a pri sakrivanju- u crveno).
+- Usklađujem način pisanja naziva 'id'-eva, radi jasnijeg kôda ('_' -> '-').
+- Poboljšavam kôd (sagledavši ga ponovo): 'let contentIsHidden;' smeštam u deklaraciju f-je 'contentManipulation()', kao i deklaraciju f-je 'showInfo()', JER SE ONA POZIVA SAMO UNUTAR NJE (u 'momir_cv.js')!
+- Preimenujem f-ju 'screenCheck()' u ispravniji naziv- 'screenSynchronize()' (u 'momir_cv.js').
+- Dodajem link za GitHub (ovde, u 'footer'-u).
+- Prilagođavam prikaz 'alert'-a pametnim telefonima.
+- Umesto 'addEventListener' za 'mediaQuery' -> 'mediaQuery.addEventListener('change', screenSynchronize)' (u 'momir_cv.js'), prelazim na upotrebu podrazumevano postojećeg atributa 'onchange', objekta 'MediaQueryList' (' mediaQuery.onchange = screenSynchronize').
+- I još neka sitna doterivanja... -->
 <!DOCTYPE html>
 
 <html lang="en">
@@ -9,22 +23,30 @@
     <meta name="author" content="Momir">
     <meta name="description" content="Momir Marković- CV">
     <meta name = "generator" content = "Visual Studio Code">
-    <meta name = "keywords" content = "momir marković, petrovaradin, novi sad, serbia, curriculum vitae, frontend developer, web programming">
+    <meta name = "keywords" content = "momir marković, petrovaradin, novi sad, belgrade, serbia, curriculum vitae, frontend developer, web programming">
     <title>Momir- CV</title>
 
     <link rel="stylesheet" href="momir_cv.css">
 
     <link rel="icon" href="Momir.png">
     
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     
     <script src="momir_cv.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 </head>
 
 <body>
+
+    <!-- Dodajem zamenu za ugradjeni 'dialog box'-'alert', radi prikaza na pametnim telefonima. (4. septembar 2024.) -->
+    <div id="custom-alert" style="display:none;">
+        <div id="custom-alert-content">
+            <p id="alert-message"></p>
+            <button id="close-alert">OK</button>
+        </div>
+    </div>
 
     <!-- Zuti 'header' koji se nalazi na vrhu -->
     <div id="header1">
@@ -37,14 +59,24 @@
         <h2>Frontend developer</h2>
     </div>
 
-    <!-- 'Navigation bar' -->
-    <div id="navbar">
-        <a href="#pers_char" title="Please, click to show/hide this content at the page!">Personal characteristics</a> 
-        <a href="#edu" title="Please, click to show/hide this content at the page!">Education</a> 
-        <a href="#skil" title="Please, click to show/hide this content at the page!">Skills</a> 
-        <a href="#know_of_lang" title="Please, click to show/hide this content at the page!">Knowledge of languages</a> 
-        <a href="#work_exp" title="Please, click to show/hide this content at the page!">Working experience</a> 
-        <a href="#footer" title="Please, click to see my contact information at the bottom of the page!">Contact</a>
+    <div id="sticky">
+        <!-- 'Navigation bar' -->
+        <div id="navbar">
+            <a href="#pers-char" title="Please, click to show/hide this content at the page!">Personal characteristics</a> 
+            <a href="#edu" title="Please, click to show/hide this content at the page!">Education</a> 
+            <a href="#skil" title="Please, click to show/hide this content at the page!">Skills</a> 
+            <a href="#know-of-lang" title="Please, click to show/hide this content at the page!">Knowledge of languages</a> 
+            <a href="#work-exp" title="Please, click to show/hide this content at the page!">Working experience</a> 
+            <a href="#footer" title="Please, click to see my contact information at the bottom of the page!">Contact</a>
+        </div>
+        <p id="info-on-show" data-info-on-show-is-hidden="true">
+            You just have shown some content on this page! Please take a look!
+            <button type="button" id="btn-close-info-on-show" title="Close this info field.">&times;</button>
+        </p>
+        <p id="info-on-hide" data-info-on-hide-is-hidden="true">
+            You just have hidden some content!
+            <button type="button" id="btn-close-info-on-hide" title="Close this info field.">&times;</button>
+        </p>
     </div>
 
     <!-- Ovaj 'row' je 'flex container' za levi i desni deo. Levi i desni deo zauzimaju po 30% i 70% -->
@@ -61,8 +93,8 @@
             <p id="hello-narrow">
                 Hello my dears! To read more about me- you can click on the links, up on the navigation bar.
             </p>
-            <div class="content" id="pers_char" data-content-is-hidden="true"> 
-                <h2>Personal characteristics</h2>
+            <div class="content" id="pers-char" data-content-is-hidden="true"> 
+                <h2>Personal characteristics <button type="button" class="btn-close-content" title="Close 'Personal characteristics'.">&times;</button></h2>
                 <div class="gray">
                     <ul>
                         <li>Ready to learn new knowledge and improve skills</li>
@@ -102,16 +134,10 @@
             </span>
             <a id="register-btn-wide" href="register.html" title="Unlock your power by registering for our cooperation!">Register</a>
             <p id="hello-wide">
-                Hello my dears! To read more about me- you can click on the links, up on the navigation bar.
-            </p>
-            <p id="info-on-show" data-info-on-show-is-hidden="true">
-                You just have changed the content at this page! Please take a look!
-            </p>
-            <p id="info-on-hide" data-info-on-hide-is-hidden="true">
-                You just have hidden some content!
+                Hello my dears! To read more about me- you can click on the links, up on the navigation bar, to show or hide the content.
             </p>
             <div class="content" id="edu" data-content-is-hidden="true"> 
-                <h2>Education</h2>
+                <h2>Education <button type="button" class="btn-close-content" title="Close 'Education'.">&times;</button></h2>
                 All times wealth!
                 <div class="gray">
                     <ul>
@@ -126,11 +152,11 @@
                 </div>
             </div><br>
             <div class="content" id="skil" data-content-is-hidden="true">
-                <h2>Skills</h2>
+                <h2>Skills <button type="button" class="btn-close-content" title="Close 'Skills'.">&times;</button></h2>
                 <div class="gray">
                     <ul>
                         <li>
-                            The IT training course- Web Programming (HTML5, CSS3, Bootstrap, Git, Bash, JavaScript, jQuery,
+                            The IT training course- Web Programming (HTML5, CSS3, Bootstrap, Git, Bash, GitHub, JavaScript, jQuery,
                             JSON, Ajax, MySQL, PHP, RESTfull, HTTP, APIs & Web Services, Apache), at the Faculty of
                             Mathematics at the University of Belgrade, organized by the Government of the Republic of
                             Serbia, with the accomplishment of the certificate for the successfully completing course
@@ -141,8 +167,8 @@
                     </ul>
                 </div>
             </div><br>
-            <div class="content" id="know_of_lang" data-content-is-hidden="true"> 
-                <h2>Knowledge of languages</h2>
+            <div class="content" id="know-of-lang" data-content-is-hidden="true"> 
+                <h2>Knowledge of languages <button type="button" class="btn-close-content" title="Close 'Knowledge of languages'.">&times;</button></h2>
                 <div class="gray">
                     <ul>
                         <li>Serbian (native)</li>
@@ -153,11 +179,11 @@
                     </ul>
                 </div>
             </div><br>
-            <div class="content" id="work_exp" data-content-is-hidden="true"> 
-                <h2>Working experience</h2>
+            <div class="content" id="work-exp" data-content-is-hidden="true"> 
+                <h2>Working experience <button type="button" class="btn-close-content" title="Close 'Working experience'.">&times;</button></h2>
                 <div class="gray">
                     <ul>
-                        <li>About 2.5 years with mentioned technologies.</li>
+                        <li>More than 3 years with mentioned Web Programming technologies.</li>
                     </ul>
                 </div>
             </div>
@@ -177,8 +203,11 @@
         Momir Marković<br>
         Petrovaradin (or Belgrade)<br>
         Serbia<br>
-        +381 64 15 736 51<br>
-        momir.n.markovic@gmail.com<br>
+        +381 61 31 700 41<br>
+        momir.n.markovic@gmail.com<br><br>
+        <a href="https://github.com/MarkovicMomir/CV-Momir" title="Interested developers may click on this link to see this project's source code on GitHub!">
+            <i class="fab fa-github fa-lg"></i> GitHub
+        </a>
     </div>
 
 </body>
