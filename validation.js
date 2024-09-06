@@ -1,3 +1,6 @@
+/* 6. September 2024.:
+I'm changing names to be more intuitive: 'elementContent' to 'inputValue', 'usernameContent' to 'usernameInput', 'emailContent' to 'emailInput', 'passwordContent' to 'passwordInput', 'subscribeContent' to 'subscribeCheckbox', 'validator' to 'validationManager'. Also, I'm erasing 'digitCounter' as sufficient.
+*/ 
 $(document).ready(() => {
 
     // Reference na delove formulara, koje cemo kontrolisati (radi se o 'input' elementima).
@@ -24,11 +27,9 @@ $(document).ready(() => {
     }
     function validatePassword(password) {
         let lengthCheck = password.length >= 8;
-        let digitCounter = 0;
         for (let i = 0; i < password.length; i++) {
             let c = password.charAt(i);
             if (c >= '0' && c <= '9') {
-                digitCounter++;
                 return lengthCheck;
             }
         }
@@ -38,66 +39,66 @@ $(document).ready(() => {
         return password1 === password2;
     }
 
-    let elementContent;
-    function validator(formElement, fnElementContentValidation, errorMsg, passwordElement1) {
-        elementContent = formElement.val();
-        let elementContentStatus;
+    let inputValue;
+    function validationManager(formElement, fninputValueValidation, errorMsg, passwordElement1) {
+        inputValue = formElement.val();
+        let inputValueStatus;
         if (formElement == formRepeatedPassword) {
-            elementContentStatus = fnElementContentValidation(elementContent, passwordElement1.val());
+            inputValueStatus = fninputValueValidation(inputValue, passwordElement1.val());
         } else {
-            elementContentStatus = fnElementContentValidation(elementContent);
+            inputValueStatus = fninputValueValidation(inputValue);
         }
-        if (elementContentStatus) {
+        if (inputValueStatus) {
             errorMsg.hide();
         } else {
             errorMsg.show();
         }
-        return elementContentStatus
+        return inputValueStatus
     }
 
     // Validacija korisnickog imena
     let usernameErrorStatus;
-    let usernameContent;
+    let usernameInput;
     formUsername.on('input', () => {
-        usernameErrorStatus = validator(formUsername, validateUsername, errorUsername);
-        usernameContent = elementContent;
+        usernameErrorStatus = validationManager(formUsername, validateUsername, errorUsername);
+        usernameInput = inputValue;
     });
 
     // Validacija email adrese
     let emailErrorStatus;
-    let emailContent;
+    let emailInput;
     formEmail.on('input', () => {
-        emailErrorStatus = validator(formEmail, validateEmail, errorEmail);
-        emailContent = elementContent;
+        emailErrorStatus = validationManager(formEmail, validateEmail, errorEmail);
+        emailInput = inputValue;
     });
 
     // Validacija lozinke
     let passwordErrorStatus;
-    let passwordContent;
+    let passwordInput;
     formPassword.on('input', () => {
-        passwordErrorStatus = validator(formPassword, validatePassword, errorPassword);
-        passwordContent = elementContent;
+        passwordErrorStatus = validationManager(formPassword, validatePassword, errorPassword);
+        passwordInput = inputValue;
     });
 
     // Da li se lozinke poklapaju?
     let passwordMatchErrorStatus;
     formRepeatedPassword.on('input', () => {
-        passwordMatchErrorStatus = validator(formRepeatedPassword, validatePasswordMatch, errorRepeatedPassword, formPassword);
+        passwordMatchErrorStatus = validationManager(formRepeatedPassword, validatePasswordMatch, errorRepeatedPassword, formPassword);
     });
 
     $('#theForm').submit((e) => {
         e.preventDefault();
-        let subscribeContent = formSubscribe.is(':checked');
+        let subscribeCheckbox = formSubscribe.is(':checked');
         console.log(usernameErrorStatus, emailErrorStatus, passwordErrorStatus, passwordMatchErrorStatus); /* Prikaz stanja gresaka u konzoli (radi kontrole pri testiranju). */
         if (
             usernameErrorStatus && emailErrorStatus && passwordErrorStatus && passwordMatchErrorStatus
         ) { // Prosle su sve validacije, mozemo da saljemo podatke na server
 
             let data = {
-                'username': usernameContent,
-                'password': passwordContent,
-                'email': emailContent,
-                'subscribe': subscribeContent,
+                'username': usernameInput,
+                'password': passwordInput,
+                'email': emailInput,
+                'subscribe': subscribeCheckbox,
             };
 
             // I varijanta- simuliramo slanje podataka na server (jer nemamo 'backend'):
