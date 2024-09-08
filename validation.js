@@ -1,5 +1,7 @@
 /* 6. September 2024.:
 I'm changing names to be more intuitive: 'elementContent' to 'inputValue', 'usernameContent' to 'usernameInput', 'emailContent' to 'emailInput', 'passwordContent' to 'passwordInput', 'subscribeContent' to 'subscribeCheckbox', 'validator' to 'validationManager'. Also, I'm erasing 'digitCounter' as sufficient.
+8. September 2024.:
+Synchronizing parameter name with the names of argument functions: 'fninputValueValidation' to 'fnValidateInputValue' and dropping off the fourth (optional) parameter of the function 'validationManager()'- 'passwordElement1' because it is used only in function call for validation of the repeated password when it gets (through the argument) the value 'formPassword' (which I write directly in the function declaration and drop it off at the argument position in the function call).
 */ 
 $(document).ready(() => {
 
@@ -40,13 +42,14 @@ $(document).ready(() => {
     }
 
     let inputValue;
-    function validationManager(formElement, fninputValueValidation, errorMsg, passwordElement1) {
+    // 'fnValidateInputValue' je parametar f-je, kojem se, pri njenom pozivu, kroz argument, za njegovu vrednost, dodeljuje naziv odgovarajuće f-je za validaciju unetog podatka.
+    function validationManager(formElement, fnValidateInputValue, errorMsg) {
         inputValue = formElement.val();
         let inputValueStatus;
         if (formElement == formRepeatedPassword) {
-            inputValueStatus = fninputValueValidation(inputValue, passwordElement1.val());
+            inputValueStatus = fnValidateInputValue(inputValue, formPassword.val());
         } else {
-            inputValueStatus = fninputValueValidation(inputValue);
+            inputValueStatus = fnValidateInputValue(inputValue);
         }
         if (inputValueStatus) {
             errorMsg.hide();
@@ -83,7 +86,7 @@ $(document).ready(() => {
     // Da li se lozinke poklapaju?
     let passwordMatchErrorStatus;
     formRepeatedPassword.on('input', () => {
-        passwordMatchErrorStatus = validationManager(formRepeatedPassword, validatePasswordMatch, errorRepeatedPassword, formPassword);
+        passwordMatchErrorStatus = validationManager(formRepeatedPassword, validatePasswordMatch, errorRepeatedPassword);
     });
 
     $('#theForm').submit((e) => {
