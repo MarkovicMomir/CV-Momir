@@ -31,9 +31,9 @@
         <form id="theForm" action="handle.php" method="post">
             <!-- Username -->
             <div class="mb-3">
-                <label for="username" class="form-label">Username (at least 4 characters)</label>
+                <label for="username" class="form-label">Username (at least 4 & max 30 characters)</label>
                 <input type="text" class="form-control" id="username" name="username" placeholder="Your username">
-                <p id='errorUsername' class='error'>The username must have at least 4 characters!</p> <!-- Sve paragrafe za ispis gresaka cemo, pri otvaranju stranice, sakriti JS-om, a kasnije cemo ih prikazivati, u zavisnosti od postojanja greske! -->
+                <p id='errorUsername' class='error'>The username must have at least 4 & max 30 characters!</p> <!-- Sve paragrafe za ispis gresaka cemo, pri otvaranju stranice, sakriti JS-om, a kasnije cemo ih prikazivati, u zavisnosti od postojanja greske! -->
             </div>
 
             <!-- User email -->
@@ -46,9 +46,9 @@
 
             <!-- User password -->
             <div class="mb-3">
-                <label for="userPassword" class="form-label">Password (at least 8 characters and at least 1 number)</label>
+                <label for="userPassword" class="form-label">Password (at least: 12 characters, 1 number, 1 uppercase & 1 lowercase letter & 1 of these special characters: ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ { | } ~)</label>
                 <input type="password" class="form-control" id="userPassword" name="password" placeholder="Password">
-                <p id='errorPassword' class='error'>The password must have at least 8 characters and at least 1 number!</p>
+                <p id='errorPassword' class='error'>The password must have at least 12 characters & at least 1 number, 1 uppercase & 1 lowercase letter & 1 special character!</p>
             </div>
 
             <div class="mb-3">
