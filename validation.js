@@ -1,8 +1,14 @@
-/* 6. September 2024.:
+/*  6. September 2024.:
 I'm changing names to be more intuitive: 'elementContent' to 'inputValue', 'usernameContent' to 'usernameInput', 'emailContent' to 'emailInput', 'passwordContent' to 'passwordInput', 'subscribeContent' to 'subscribeCheckbox', 'validator' to 'validationManager'. Also, I'm erasing 'digitCounter' as sufficient.
 8. September 2024.:
 Synchronizing parameter name with the names of argument functions: 'fninputValueValidation' to 'fnValidateInputValue' and dropping off the fourth (optional) parameter of the function 'validationManager()'- 'passwordElement1' because it is used only in function call for validation of the repeated password when it gets (through the argument) the value 'formPassword' (which I write directly in the function declaration and drop it off at the argument position in the function call).
-*/ 
+11. September 2024.:
+Limitation of 'username' max length to 30 characters (and correction of the error message for 'username' input and 'label' text in 'register.html') and improvement of password validation (with the correction of the error message for 'password' input and 'label' text in 'register.html').
+Adding of 'use strict'.
+Moving the variable declarations ('hasNumber', 'hasLowerCase' and 'hasUpperCase') to the top of the function declaration as well as the variable declarations in the global scope ('inputValue', 'usernameErrorStatus', 'usernameInput', 'emailErrorStatus', 'emailInput', 'passwordErrorStatus', 'passwordInput' & 'passwordMatchErrorStatus') to the top of it and the declaration of 'char' to the top of the 'for' loop.
+*/
+ 
+'use strict'; // Dodajem. (11. September 2024.) 
 $(document).ready(() => {
 
     // Reference na delove formulara, koje cemo kontrolisati (radi se o 'input' elementima).
@@ -20,20 +26,57 @@ $(document).ready(() => {
 
     // Pakujemo poruke i u niz, za jednostavniju, istovremenu, izmenu svih poruka.
     let errors = [errorUsername, errorEmail, errorPassword, errorRepeatedPassword];
+    let inputValue;
+    let usernameErrorStatus;
+    let usernameInput;
+    let emailErrorStatus;
+    let emailInput;
+    let passwordErrorStatus;
+    let passwordInput;
+    let passwordMatchErrorStatus;
 
     function hideAllErrorMessages() { errors.forEach(errMsg => errMsg.hide()); }
-    function validateUsername(username) { return username.trim().length >= 4; }
+    function validateUsername(username) { 
+        let usernameTrimedLength = username.trim().length;
+        return usernameTrimedLength >= 4 && usernameTrimedLength <= 30; }
     function validateEmail(email) {
         let re = /\S+@\S+\.\S+/; /* Jednostavan regularni izraz kojim cemo grubo proveravati ispravnost unete email adrese. */
         return re.test(email);
     }
     function validatePassword(password) {
-        let lengthCheck = password.length >= 8;
-        for (let i = 0; i < password.length; i++) {
-            let c = password.charAt(i);
-            if (c >= '0' && c <= '9') {
-                return lengthCheck;
+        let passwordLength = password.length;
+        // Premestio sam deklaracije promenljivih 'hasNumber', 'hasLowerCase' i 'hasUpperCase', ovde na vrh deklaracije f-je. (11. September 2024.)
+        let hasNumber = false; 
+        let hasLowerCase = false;
+        let hasUpperCase = false;
+        let hasSpecChar = false;
+        let specChar = ['!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '{', '|', '}', '~'];
+
+        if (passwordLength < 12) {
+            return false;
+        }
+
+        for (let i = 0; i < passwordLength; i++) {
+            // Preimenovao sam 'c' u 'char' i premestio ovu deklaraciju na vrh 'for' petlje. (11. September 2024.):
+            let char = password.charAt(i);
+            if (hasNumber && hasLowerCase && hasUpperCase && hasSpecChar) {
+                return true; // Prekidam čim se nađe po 1 od svakog. Na ovom mestu, a ne posle 'if' provera, zbog 'continue'!
             }
+            if (char >= '0' && char <= '9') { 
+                hasNumber = true;
+                continue;
+            } else if (char >= 'a' && char <= 'z') {
+                hasLowerCase = true;
+                continue;
+            } else if (char >= 'A' && char <= 'Z') {
+                hasUpperCase = true;
+                continue;
+            } else if (specChar.indexOf(char) > -1) {
+                hasSpecChar = true;
+            }
+        }
+        if (hasNumber && hasLowerCase && hasUpperCase && hasSpecChar) {
+            return true; // Provera i na ovom mestu, za poslednji korak 'for' petlje, posle kojeg se kôd ne vraća na gornju proveru, na početku 'for' petlje, već izlazi iz 'for' petlje!
         }
         return false;
     }
@@ -41,7 +84,6 @@ $(document).ready(() => {
         return password1 === password2;
     }
 
-    let inputValue;
     // 'fnValidateInputValue' je parametar f-je, kojem se, pri njenom pozivu, kroz argument, za njegovu vrednost, dodeljuje naziv odgovarajuće f-je za validaciju unetog podatka.
     function validationManager(formElement, fnValidateInputValue, errorMsg) {
         inputValue = formElement.val();
@@ -60,31 +102,24 @@ $(document).ready(() => {
     }
 
     // Validacija korisnickog imena
-    let usernameErrorStatus;
-    let usernameInput;
     formUsername.on('input', () => {
         usernameErrorStatus = validationManager(formUsername, validateUsername, errorUsername);
         usernameInput = inputValue;
     });
 
     // Validacija email adrese
-    let emailErrorStatus;
-    let emailInput;
     formEmail.on('input', () => {
         emailErrorStatus = validationManager(formEmail, validateEmail, errorEmail);
         emailInput = inputValue;
     });
 
     // Validacija lozinke
-    let passwordErrorStatus;
-    let passwordInput;
     formPassword.on('input', () => {
         passwordErrorStatus = validationManager(formPassword, validatePassword, errorPassword);
         passwordInput = inputValue;
     });
 
     // Da li se lozinke poklapaju?
-    let passwordMatchErrorStatus;
     formRepeatedPassword.on('input', () => {
         passwordMatchErrorStatus = validationManager(formRepeatedPassword, validatePasswordMatch, errorRepeatedPassword);
     });
