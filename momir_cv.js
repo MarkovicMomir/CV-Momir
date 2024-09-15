@@ -51,19 +51,19 @@ $(document).ready(function () {
         };
     }
 
-    screenSynchronize(mediaQuery); // Parametar 'e' f-je 'screenSynchronize(e)' ima dvostruki karakter. U ovoj liniji mu se, preko argumenta, prosledjuje objekat 'MediaQueryList' (sacuvan u promenljivoj 'mediaQuery'), a, u narednoj liniji, mu 'eventListener' 'change' prosledjuje 'event' objekat 'MediaQueryListEvent'!
+    screenSynchronize(mediaQuery); // The 'e' parameter in the 'screenSynchronize(e)' function has a dual role. In this line, it receives the 'MediaQueryList' object (stored in the 'mediaQuery' variable) via an argument, and in the next line, the 'change' event listener passes the 'MediaQueryListEvent' event object! [Serbian: Parametar 'e' f-je 'screenSynchronize(e)' ima dvostruki karakter. U ovoj liniji mu se, preko argumenta, prosledjuje objekat 'MediaQueryList' (sacuvan u promenljivoj 'mediaQuery'), a, u narednoj liniji, mu 'eventListener' 'change' prosledjuje 'event' objekat 'MediaQueryListEvent'!]
     mediaQuery.onchange = screenSynchronize;
 
     $('#navbar a').click((e) => {
-        console.log(e.target.innerHTML); // Provera
+        console.log(e.target.innerHTML); // Check [Serbian: Provera]
         function contentManipulation(e) {
             let contentIsHidden;
-            // F-ja za prikazivanje 2 informaciona paragrafa, na sirokim ekranima:
-            function showInfo(i) { // 'i' -> index konkretnog elementa iz objekta sa dohvacenim elementima ('content').
+            // Function for displaying two informational paragraphs on wide screens: [Serbian: F-ja za prikazivanje 2 informaciona paragrafa, na sirokim ekranima:]
+            function showInfo(i) { // 'i' -> the index of a specific element from the fetched elements object ('content'). [Serbian: 'i' -> index konkretnog elementa iz objekta sa dohvacenim elementima ('content').]
                 let InfoOnShowIsHidden;
                 let InfoOnHideIsHidden;
-                contentIsHidden = content.eq(i).attr('data-content-is-hidden') === 'true'; // Dohvatamo string vrednost, odgovarajuceg atributa, i konvertujemo string 'true'/'false' u 'Bool'-ovu vrednost.
-                // contentIsHidden = JSON.parse(content.eq(i).attr('data-content-is-hidden')); // Moze i ovako.
+                contentIsHidden = content.eq(i).attr('data-content-is-hidden') === 'true'; // We fetch the string value of the corresponding attribute and convert the string 'true'/'false' into a Boolean value. [Serbian: Dohvatamo string vrednost, odgovarajuceg atributa, i konvertujemo string 'true'/'false' u 'Bool'-ovu vrednost.]
+                // contentIsHidden = JSON.parse(content.eq(i).attr('data-content-is-hidden')); // That can also be done like this. [Serbian: Moze i ovako.]
                 InfoOnShowIsHidden = infoOnShow.attr('data-info-on-show-is-hidden') === 'true';
                 InfoOnHideIsHidden = infoOnHide.attr('data-info-on-hide-is-hidden') === 'true';
                 if (screenIsNarrow) {
@@ -101,14 +101,14 @@ $(document).ready(function () {
             };
             let sticky = $('#sticky');
             switch (e.target.innerHTML) {
-                case 'Personal characteristics': content.eq(0).toggle('slow', () => { // UKLONIO SAM ažuriranje promenljive 'contentIsHidden', pošto poziv f-je 'showInfo()' (u sledećoj liniji) radi to!!!
+                case 'Personal characteristics': content.eq(0).toggle('slow', () => { // I REMOVED updating the 'contentIsHidden' variable since the 'showInfo()' function call (in the next line) handles that!!! [Serbian: UKLONIO SAM ažuriranje promenljive 'contentIsHidden', pošto poziv f-je 'showInfo()' (u sledećoj liniji) radi to!!!]
                     showInfo(0);
                     if (contentIsHidden) {
                         e.target.style.color = 'darkgreen';
                     } else {
                         e.target.style.color = 'brown';
                     }
-                    if (content.eq(0) !== "" && sticky.length && !screenIsNarrow && contentIsHidden) { // Ovo obezbeđivanje da dohvaćeni sadržaj postoji, MOŽDA, u ovakvom slučaju, NIJE POTREBNO (POŠTO znam da taj sadržaj postoji!), ALI PREDSTAVLJA DOBRU PRAKSU! TAKOĐE, ČINI MI SE INTERESANTNIM I BEZ '!screenIsNarrow'!!! Ali ću uraditi sa njim, da ne bi izgledalo kao ne prilagođeno u smislu responzivnosti! A 'contentIsHidden' obezbeđuje da se, pri sakrivanju sadržaja ne primnjuje kôd koji sledi (za animaciju sa skrolovanjem)!
+                    if (content.eq(0) !== "" && sticky.length && !screenIsNarrow && contentIsHidden) { // This ensurance, that the fetched content exists, MAY NOT BE NECESSARY in this case (SINCE I know the content exists!), BUT IT IS GOOD PRACTICE! ALSO, I FIND IT INTERESTING EVEN WITHOUT '!screenIsNarrow'!!! But I will include it to avoid looking like unadjusted for responsivity! And 'contentIsHidden' ensures that, when the user is hiding the content, the following code (for scroll animation) is not executed! [Serbian: Ovo obezbeđivanje da dohvaćeni sadržaj postoji, MOŽDA, u ovakvom slučaju, NIJE POTREBNO (POŠTO znam da taj sadržaj postoji!), ALI PREDSTAVLJA DOBRU PRAKSU! TAKOĐE, ČINI MI SE INTERESANTNIM I BEZ '!screenIsNarrow'!!! Ali ću uraditi sa njim, da ne bi izgledalo kao ne prilagođeno u smislu responzivnosti! A 'contentIsHidden' obezbeđuje da se, pri sakrivanju sadržaja ne primnjuje kôd koji sledi (za animaciju sa skrolovanjem)!]
                         setTimeout(() => ($('html, body').animate({
                             scrollTop: content.eq(0).offset().top - sticky.outerHeight(true)
                         }, 2000)), 1000);
@@ -188,8 +188,8 @@ $(document).ready(function () {
     });
 
     $('.btn-close-content').click((e) => {
-        console.log(e); // 2024.
-        switch (e.target.title) { // Ovde je bitno da se, na ovakav nacin, moze pristupiti atributu 'title' u svim modernim pretrazivacima, jer je 'title' atribut objekta 'HTMLElement', kojem pristupamo preko atributa 'target' objekta 'Event' (u suprotnom bi morali da koristimo, dodatne 'id'-eve, koje bi zadali u dugmadima- <button>, za zatvaranje sadrzaja)!
+        console.log(e); // September 4, 2024
+        switch (e.target.title) { // The important thing here is that, in this way, we can access the 'title' attribute in all modern browsers because the 'title' is an attribute of the 'HTMLElement' object, accessed via the 'target' attribute of the 'Event' object (otherwise, we would have to use additional 'id's assigned to the buttons <button> for closing the content)! [Serbian: Ovde je bitno da se, na ovakav nacin, moze pristupiti atributu 'title' u svim modernim pretrazivacima, jer je 'title' atribut objekta 'HTMLElement', kojem pristupamo preko atributa 'target' objekta 'Event' (u suprotnom bi morali da koristimo, dodatne 'id'-eve, koje bi zadali u dugmadima- <button>, za zatvaranje sadrzaja)!]
             case "Close 'Personal characteristics'.": content.eq(0).hide().attr('data-content-is-hidden', 'true');
                 $('#navbar a[href="#pers-char"]').css('color', 'brown');
                 break;

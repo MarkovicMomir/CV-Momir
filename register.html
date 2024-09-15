@@ -9,7 +9,7 @@
     <title>Registration</title>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> <!-- jQuery za upotrebu u fajlu za validaciju. -->
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> <!-- jQuery for use in the validation file. [Serbian: jQuery za upotrebu u fajlu za validaciju.] -->
 
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -33,7 +33,7 @@
             <div class="mb-3">
                 <label for="username" class="form-label">Username (at least 4 & max 30 characters)</label>
                 <input type="text" class="form-control" id="username" name="username" placeholder="Your username">
-                <p id='errorUsername' class='error'>The username must have at least 4 & max 30 characters!</p> <!-- Sve paragrafe za ispis gresaka cemo, pri otvaranju stranice, sakriti JS-om, a kasnije cemo ih prikazivati, u zavisnosti od postojanja greske! -->
+                <p id='errorUsername' class='error'>The username must have at least 4 & max 30 characters!</p> <!-- We will hide all error message paragraphs, using JS, when the page loads, and later display them depending on the presence of an error! [Serbian: Sve paragrafe za ispis gresaka cemo, pri otvaranju stranice, sakriti JS-om, a kasnije cemo ih prikazivati, u zavisnosti od postojanja greske!] -->
             </div>
 
             <!-- User email -->
@@ -65,13 +65,13 @@
 
             <br>
 
-            <button type="submit" class="btn btn-primary">Submit</button> <!-- Izbacujem  id="formSubmit". -->
+            <button type="submit" class="btn btn-primary">Submit</button> <!-- I removed id="formSubmit". [Serbian: Izbacujem  id="formSubmit".] -->
         </form>
 
-        <p id='serverMessage'> <!-- Paragraf za ispisivanje poruka od servera! -->
+        <p id='serverMessage'> <!-- Paragraph for displaying messages from the server! [Serbian: Paragraf za ispisivanje poruka od servera!] -->
         </p>
 
-        <!-- Bootstrap-ov JS paket (na dnu <body>-a) -->
+        <!-- Bootstrap JS package (at the bottom of the <body>) [Serbian: Bootstrap-ov JS paket (na dnu <body>-a)] -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         
     </div>

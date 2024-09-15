@@ -4,7 +4,7 @@ body {
     font-size: large; 
 }
 
-/* Slike i ostali elementi su, u mnogim slucajevima, podeseni na 100% unutar svakog <div>-a. Da nije ovako podesen box-sizing (kao ispod), oni bi iskakali iz margina, a levi i desni deo ('side' i 'main') ne bi bili jedan pored drugog, vec bi se desni spustio. */
+/* Images and other elements are, in many cases, set to 100% within each <div>. If the box-sizing wasn’t set like below, they would overflow the margins, and the left and right sections ('side' and 'main') would not be side by side, but the right section would drop down. [Serbian: Slike i ostali elementi su, u mnogim slucajevima, podeseni na 100% unutar svakog <div>-a. Da nije ovako podesen box-sizing (kao ispod), oni bi iskakali iz margina, a levi i desni deo ('side' i 'main') ne bi bili jedan pored drugog, vec bi se desni spustio.] */
 div {
     box-sizing: border-box;
     overflow: auto;
@@ -22,14 +22,14 @@ div {
     color: white;
 }
 
-/* 'Navigation bar', koji sadrzi linkove, je 'flex container' za njih, pa su oni jedan pored drugog. Da predju marginu, presli bi jednostavno u novi red, zbog 'wrap'-ovanja (STO JE DOBRO ZA RESPONZIVNOST!!!) */
+/* The 'Navigation bar', which contains links, is a 'flex container' for them, so they are next to each other. If they exceed the margin, they would simply be displayed to a new line due to 'wrap' (WHICH IS GREAT FOR RESPONSIVENESS!!!) [Serbian: 'Navigation bar', koji sadrzi linkove, je 'flex container' za njih, pa su oni jedan pored drugog. Da predju marginu, presli bi jednostavno u novi red, zbog 'wrap'-ovanja (STO JE DOBRO ZA RESPONZIVNOST!!!)] */
 #navbar {
     display: flex;
     background-color: black;
     flex-wrap: wrap;
 }
 
-/* Samo linkovi u 'Navigation baru' */
+/* Only links in the 'Navigation bar' [Serbian: Samo linkovi u 'Navigation baru'] */
 #navbar a {
     color: white;
     padding: 14px 20px;
@@ -65,7 +65,7 @@ a {
   color: #0000EE;
 }
 
-/* Ovaj 'row' je 'flex container' za glavne delove - levi i desni */
+/* This 'row' is a 'flex container' for the main sections - left and right [Serbian: Ovaj 'row' je 'flex container' za glavne delove - levi i desni] */
 #row {  
     display: flex;
     flex-flow: row wrap;
@@ -77,13 +77,13 @@ a {
 
 @media screen and (min-width: 600px) {
 
-  /* Levi deo je 30% sirine */
+  /* The left section is 30% width [Serbian: Levi deo je 30% sirine] */
   #side {
     width: 30%;
     padding: 20px;
   } 
   
-  /* Glavni, desni deo je 70% sirine. on ce se lepo uklopiti sa levim delom, jer su unutar flex containera i ukupno 100% sirine */
+  /* The main, right section is 70% width. It will fit nicely with the left section since they are within a flex container and make up 100% width overall. [Serbian: Glavni, desni deo je 70% sirine. On ce se lepo uklopiti sa levim delom, jer su unutar flex containera i ukupno 100% sirine] */
   #main {
     width: 70%;
     padding: 20px;
@@ -128,7 +128,7 @@ a {
   width: 100%;
 }
 
-/* Sivi footer na dnu */
+/* The gray 'footer' at the bottom. [Serbian: Sivi 'footer' na dnu] */
 #footer {
   padding: 20px;
   text-align: center;

@@ -1,4 +1,22 @@
-<!-- 4. septembra 2024.:
+<!-- September 4, 2024:
+- Improving user experience (UI/UX):
+    - In the 'momir_cv.js' file, I enable scrolling to the displayed ('showed' (JA)) HTML element and remove the redundant 'alert'.
+    - I added a close function for the displayed content on small screens -> with the 'X' button (I added the 'X' button for closing of the displayed ('showed') content on small screens (JA)).
+    - In the 'momir_cv.css' file, I modify the paragraphs displaying information, '#info-on-show' and '#info-on-hide', so they become 'sticky' (stuck to the top edge) on larger screens, like '#navbar'. To achieve this, I also changed their position in the HTML ('index.html')!
+    - I added a cross 'X' to close the paragraphs with displayed information in '#info-on-show' and '#info-on-hide' (I added a cross 'X' in '#info-on-show' and '#info-on-hide' for closing the paragraphs with 'showed' information (JA)), styled it in 'momir_cv.css', and added functionality in the 'momir_cv.js' file. (In CSS, I also set 'cursor: pointer'.)
+    - I added functionality so that when clicking on a 'navbar' link (for showing/hiding content), its color changes (green for showing, red for hiding).
+- Standardizing the naming convention (Synchronizing the naming (JA)) of 'id's for clearer code ('_' -> '-').
+- Improving the code (after reviewing it): 'let contentIsHidden;' is re(JA)placed within (into (JA)) the 'contentManipulation()' function declaration, as well as the 'showInfo()' function declaration, SINCE IT IS ONLY CALLED WITHIN IT (in 'momir_cv.js')!
+- Renaming the 'screenCheck()' function to a more appropriate name - 'screenSynchronize()' (in 'momir_cv.js').
+- Adding a GitHub link (here, in the 'footer').
+- Adapting the display of 'alert' for smartphones.
+- Instead of using 'addEventListener' for 'mediaQuery' -> 'mediaQuery.addEventListener('change', screenSynchronize)' (in 'momir_cv.js'), I switched to using the default 'onchange' attribute of the 'MediaQueryList' object ('mediaQuery.onchange = screenSynchronize').
+- And some minor tweaks...
+
+September 16, 2024.:
+- Adding of English comments.
+ 
+[Serbian: 4. septembra 2024.:
 - Unapređujem korisnicko iskustvo (UI/UX):
     - U fajlu 'momir_cv.js' zadajem skrolovanje na prikazani HTML element i izbacujem 'alert' kao višak.
     - Dodao sam, na malim ekranima, zatvaranje prikazanog sadržaja -> dugmetom 'X'.
@@ -11,7 +29,10 @@
 - Dodajem link za GitHub (ovde, u 'footer'-u).
 - Prilagođavam prikaz 'alert'-a pametnim telefonima.
 - Umesto 'addEventListener' za 'mediaQuery' -> 'mediaQuery.addEventListener('change', screenSynchronize)' (u 'momir_cv.js'), prelazim na upotrebu podrazumevano postojećeg atributa 'onchange', objekta 'MediaQueryList' (' mediaQuery.onchange = screenSynchronize').
-- I još neka sitna doterivanja... -->
+- I još neka sitna doterivanja...
+
+16. septembra 2024.:
+- Dodajem komentare na engleskom.] -->
 <!DOCTYPE html>
 
 <html lang="en">
@@ -40,7 +61,7 @@
 
 <body>
 
-    <!-- Dodajem zamenu za ugradjeni 'dialog box'-'alert', radi prikaza na pametnim telefonima. (4. septembar 2024.) -->
+    <!-- Added a replacement for the built-in 'dialog box' - 'alert', for display on smartphones. (September 4, 2024.) [Serbian: Dodajem zamenu za ugradjeni 'dialog box'-'alert', radi prikaza na pametnim telefonima. (4. septembar 2024.)] -->
     <div id="custom-alert" style="display:none;">
         <div id="custom-alert-content">
             <p id="alert-message"></p>
@@ -48,12 +69,12 @@
         </div>
     </div>
 
-    <!-- Zuti 'header' koji se nalazi na vrhu -->
+    <!-- Yellow 'header' at the top [Serbian: Zuti 'header' koji se nalazi na vrhu] -->
     <div id="header1">
         <h4>Curriculum Vitae</h4>
     </div>
 
-    <!-- Zeleni 'header' koji se nalazi ispod zutog -->
+    <!-- Green 'header' below the yellow one [Serbian: Zeleni 'header' koji se nalazi ispod zutog] -->
     <div id="header2">
         <h1>Momir Marković</h1>
         <h2>Frontend developer</h2>
@@ -79,14 +100,14 @@
         </p>
     </div>
 
-    <!-- Ovaj 'row' je 'flex container' za levi i desni deo. Levi i desni deo zauzimaju po 30% i 70% -->
+    <!-- This 'row' is a 'flex container' for the left and right sections. The left and right sections take up 30% and 70%, respectively [Serbian: Ovaj 'row' je 'flex container' za levi i desni deo. Levi i desni deo zauzimaju po 30% i 70%] -->
     <span id="register-info-narrow">
         You may register for further cooperation with me.
     </span>
     <div id="row">
         <a id="register-btn-narrow" href="register.html" title="Unlock your power by registering for our cooperation!">Register</a> 
 
-        <!-- Levi deo stranice -->
+        <!-- Left section of the page [Serbian: Levi deo stranice] -->
         <div id="side">
             <h4>Is IT me you looking for?</h4>
             <img src="Momir.png" alt="My image"><br><br>
@@ -127,7 +148,7 @@
             </div>
         </div>
 
-        <!-- Glavni deo, koji se nalazi sa desne strane -->
+        <!-- Main section on the right side [Serbian: Glavni deo, koji se nalazi sa desne strane] -->
         <div id="main">
             <span id="register-info-wide">
                 You may register for further cooperation with me.
@@ -189,7 +210,7 @@
             </div>
         </div>
 
-        <!-- Kraj diva (klase 'row') koji predstavlja 'flex container' za levi i desni deo -->
+        <!-- End of the 'div' (class 'row') representing the 'flex container' for the left and right sections [Serbian: Kraj 'div'-a (klase 'row') koji predstavlja 'flex container' za levi i desni deo] -->
     </div>
 
     <a id="go-to-top" href="#header1">Go to the top</a>
@@ -198,7 +219,7 @@
         (P.S.: I am very proud of my two sons. Also, I am pleased that I have made my own recipes for integral pancakes and for a variety of integral bread, antic bread, and cakes...)
     </p>
 
-    <!-- 'Footer' na dnu -->
+    <!-- 'Footer' at the bottom [Serbian: 'Footer' na dnu] -->
     <div id="footer">
         Momir Marković<br>
         Petrovaradin (or Belgrade)<br>
