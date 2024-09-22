@@ -58,14 +58,37 @@ $(document).ready(function () {
         console.log(e.target.innerHTML); // Check [Serbian: Provera]
         function contentManipulation(e) {
             let contentIsHidden;
+            let sticky = $('#sticky'); // Since I missed moving this declaration here earlier, I’m doing it now.  [Serbian: Posto ovu deklaraciju ranije nisam premestio ovde, radim to sada.]
+            let InfoOnShowIsHidden;
             // Function for displaying two informational paragraphs on wide screens: [Serbian: F-ja za prikazivanje 2 informaciona paragrafa, na sirokim ekranima:]
             function showInfo(i) { // 'i' -> the index of a specific element from the fetched elements object ('content'). [Serbian: 'i' -> index konkretnog elementa iz objekta sa dohvacenim elementima ('content').]
-                let InfoOnShowIsHidden;
                 let InfoOnHideIsHidden;
                 contentIsHidden = content.eq(i).attr('data-content-is-hidden') === 'true'; // We fetch the string value of the corresponding attribute and convert the string 'true'/'false' into a Boolean value. [Serbian: Dohvatamo string vrednost, odgovarajuceg atributa, i konvertujemo string 'true'/'false' u 'Bool'-ovu vrednost.]
                 // contentIsHidden = JSON.parse(content.eq(i).attr('data-content-is-hidden')); // That can also be done like this. [Serbian: Moze i ovako.]
                 InfoOnShowIsHidden = infoOnShow.attr('data-info-on-show-is-hidden') === 'true';
                 InfoOnHideIsHidden = infoOnHide.attr('data-info-on-hide-is-hidden') === 'true';
+                if (!screenIsNarrow) {
+                    if (contentIsHidden) { 
+                        if (InfoOnShowIsHidden) {
+                            infoOnShow.show();
+                            infoOnHide.hide();
+                        } else if (!InfoOnShowIsHidden) {
+                            infoOnShow.hide('slow');
+                            infoOnShow.show('slow');
+                        }
+                    } else if (!contentIsHidden) {
+                        if (InfoOnHideIsHidden) {
+                            infoOnShow.hide();
+                            infoOnHide.show();
+                            } else if (!InfoOnHideIsHidden) {
+                            infoOnHide.hide('slow');
+                            infoOnHide.show('slow');
+                            infoOnShow.hide();
+                        }
+                    };
+                }
+            };
+            function adjustDataAtrrs(i) { // 'i' -> the index of a specific element from the fetched elements object ('content'). [Serbian: 'i' -> index konkretnog elementa iz objekta sa dohvacenim elementima ('content').]
                 if (screenIsNarrow) {
                     if (contentIsHidden) {
                         content.eq(i).attr('data-content-is-hidden', 'false')
@@ -75,34 +98,21 @@ $(document).ready(function () {
                 } else if (!screenIsNarrow) {
                     if (contentIsHidden) { 
                         if (InfoOnShowIsHidden) {
-                            infoOnShow.show();
-                            infoOnHide.hide();
                             infoOnShow.attr('data-info-on-show-is-hidden', 'false');
                             infoOnHide.attr('data-info-on-hide-is-hidden', 'true');
-                        } else if (!InfoOnShowIsHidden) {
-                            infoOnShow.hide('slow');
-                            infoOnShow.show('slow');
                         }
                         content.eq(i).attr('data-content-is-hidden', 'false');
                     } else if (!contentIsHidden) {
-                        if (InfoOnHideIsHidden) {
-                            infoOnShow.hide();
-                            infoOnHide.show();
-                        } else if (!InfoOnHideIsHidden) {
-                            infoOnHide.hide('slow');
-                            infoOnHide.show('slow');
-                            infoOnShow.hide();
-                        }
                         infoOnShow.attr('data-info-on-show-is-hidden', 'true');
                         infoOnHide.attr('data-info-on-hide-is-hidden', 'false');
                         content.eq(i).attr('data-content-is-hidden', 'true');
                     };
                 }
             };
-            let sticky = $('#sticky');
             switch (e.target.innerHTML) {
                 case 'Personal characteristics': content.eq(0).toggle('slow', () => { // I REMOVED updating the 'contentIsHidden' variable since the 'showInfo()' function call (in the next line) handles that!!! [Serbian: UKLONIO SAM ažuriranje promenljive 'contentIsHidden', pošto poziv f-je 'showInfo()' (u sledećoj liniji) radi to!!!]
                     showInfo(0);
+                    adjustDataAtrrs(0);
                     if (contentIsHidden) {
                         e.target.style.color = 'darkgreen';
                     } else {
@@ -117,6 +127,7 @@ $(document).ready(function () {
                     break;
                 case 'Education': content.eq(1).toggle('slow', () => {
                     showInfo(1);
+                    adjustDataAtrrs(1);
                     if (contentIsHidden) {
                         e.target.style.color = 'darkgreen';
                     } else {
@@ -131,6 +142,7 @@ $(document).ready(function () {
                     break;
                 case 'Skills': content.eq(2).toggle('slow', () => {
                     showInfo(2);
+                    adjustDataAtrrs(2);
                     if (contentIsHidden) {
                         e.target.style.color = 'darkgreen';
                     } else {
@@ -145,6 +157,7 @@ $(document).ready(function () {
                     break;
                 case 'Knowledge of languages': content.eq(3).toggle('slow', () => {
                     showInfo(3);
+                    adjustDataAtrrs(3);
                     if (contentIsHidden) {
                         e.target.style.color = 'darkgreen';
                     } else {
@@ -159,6 +172,7 @@ $(document).ready(function () {
                     break;
                 case 'Working experience': content.eq(4).toggle('slow', () => {
                     showInfo(4);
+                    adjustDataAtrrs(4);
                     if (contentIsHidden) {
                         e.target.style.color = 'darkgreen';
                     } else {
