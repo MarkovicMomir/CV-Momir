@@ -145,7 +145,7 @@ $(document).ready(() => {
 
             // First option - we simulate sending the data to the server (since we don’t have a 'backend' on 'Netlify' -> 'https://momir.netlify.app'). [Serbian: I varijanta- simuliramo slanje podataka na server (jer nemamo 'backend' na 'Netlify'-u -> 'https://momir.netlify.app'))]:
 
-            console.log("Salju se podaci na server"); /* Console message indicating that in a real situation (with a reception file 'handle.php' set on the server, from the 'action' attribute of the <form> element), the data would now be sent to the server! [Serbian: Poruka u konzoli, kojom oznacavamo da bi se u realnoj situaciji (pri, na serveru, postavljenom prijemnom fajlu- 'handle.php', iz atributa 'action', elementa <form>), u ovom trenutku, slali podaci na server!] */
+            console.log("Data are being sent to the server"); /* Console message indicating that in a real situation (with a reception file 'handle.php' set on the server, from the 'action' attribute of the <form> element), the data would now be sent to the server! [Serbian: Poruka u konzoli, kojom oznacavamo da bi se u realnoj situaciji (pri, na serveru, postavljenom prijemnom fajlu- 'handle.php', iz atributa 'action', elementa <form>), u ovom trenutku, slali podaci na server!] */
            
             // End of the first option. [Serbian: Kraj I varijante.]
 
@@ -164,12 +164,12 @@ $(document).ready(() => {
                 data: form.serialize(),
                 success: function (data) {
                     if (data.success) {
-                        console.log(`Podaci uspesno poslati na server na url ${url}!`);
+                        console.log(`Data were successfully sent to the server at the URL ${url}!`);
                         console.log(data);
                         alert(data.msg);
                         $('#serverMessage').text(data.msg); // Display a message to the user! The 'success' and 'msg' (in the 'if' statement) are keys of the object sent from the server (from the 'backend' file). [Serbian: Ispis poruke korisniku! Ovo 'success' i 'msg' (u 'if'-u) su kljucevi objekta, poslatog sa servera (iz 'backend' fajla).]
                     } else {
-                        console.log("Greska!");
+                        console.log("Errorr!");
                         console.log(data);
                         alert(data.msg);
                         $('#serverMessage').text(data.msg);
@@ -177,7 +177,7 @@ $(document).ready(() => {
 
                 },
                 error: function(e) {
-                    console.log("Gresska!");
+                    console.log("Errorrr!");
                     console.log(e);
                     alert(e.statusText);
                     $('#serverMessage').html(e.responseText);
@@ -189,7 +189,7 @@ $(document).ready(() => {
             // End of the second option. [Serbian: Kraj II varijante.]
 
         } else {
-            console.log("Neuspelo slanje podataka na server, jer nisu prosle sve provere!");
+            console.log("Failed to send data to the server because not all validations passed!!");
             alert("Sending data to the server failed because they didn't pass the validation!");
         }
     });
