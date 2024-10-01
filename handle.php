@@ -7,7 +7,7 @@ if (isset($_POST['subscribed']))
     $subscribed = 1;
 else $subscribed = 0;
 
-$db = new mysqli('localhost', 'root', '', 'momir_db'); // Here, I specified the arguments for testing on a local server (on 'Wampserver')." [Serbian: Ovde sam zadao argumente za probni rad, na lokalnom serveru u racunaru (na 'Wampserveru').]
+$db = new mysqli('localhost', 'root', '', 'momir_db'); //Here, I specified the arguments that I used for testing on a local server (on 'Wampserver'). On the host server for http://momir.atwebpages.com, I put the arguments appropriate for that server. [Serbian: Ovde sam zadao argumente koje sam koristio za probni rad, na lokalnom serveru u racunaru (na 'Wampserveru'). Na 'host' serveru za http://momir.atwebpages.com sam stavio odgovarajuće argumente za taj server.]
 if ($db->connect_errno) {
     echo json_encode([
         "msg" => "Failed to connect to the base!"

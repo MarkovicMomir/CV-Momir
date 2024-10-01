@@ -143,7 +143,7 @@ $(document).ready(() => {
                 'subscribe': subscribeCheckbox,
             };
 
-            // First option - we simulate sending the data to the server (since we don’t have a 'backend'). [Serbian: I varijanta- simuliramo slanje podataka na server (jer nemamo 'backend')]:
+            // First option - we simulate sending the data to the server (since we don’t have a 'backend' on 'Netlify' -> 'https://momir.netlify.app'). [Serbian: I varijanta- simuliramo slanje podataka na server (jer nemamo 'backend' na 'Netlify'-u -> 'https://momir.netlify.app'))]:
 
             console.log("Salju se podaci na server"); /* Console message indicating that in a real situation (with a reception file 'handle.php' set on the server, from the 'action' attribute of the <form> element), the data would now be sent to the server! [Serbian: Poruka u konzoli, kojom oznacavamo da bi se u realnoj situaciji (pri, na serveru, postavljenom prijemnom fajlu- 'handle.php', iz atributa 'action', elementa <form>), u ovom trenutku, slali podaci na server!] */
            
@@ -184,7 +184,7 @@ $(document).ready(() => {
                 }
             });
 
-            // For this option to work correctly in a real situation, a 'backend' file would exist on the server, 'handle.php', and a database it connects to! [Serbian: Da bi ova varijanta radila kako treba, u realnoj situaciji bi postojao i 'backend' fajl na serveru 'handle.php' i baza podataka sa kojom bi on bio povezan!]
+            // For this option to work correctly in a real situation, a 'backend' file would exist on the server, 'handle.php', and a database it connects to (as I have done on: http://momir.atwebpages.com)! [Serbian: Da bi ova varijanta radila kako treba, u realnoj situaciji bi postojao i 'backend' fajl na serveru 'handle.php' i baza podataka sa kojom bi on bio povezan (kao što sam uradio na: http://momir.atwebpages.com)!]
            
             // End of the second option. [Serbian: Kraj II varijante.]
 
